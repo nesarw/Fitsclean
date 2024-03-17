@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "302067876228",
+    "project_id": "fitsclean-sample",
+    "storage_bucket": "fitsclean-sample.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:302067876228:android:909168fcfa72c58e129dd1",
+        "android_client_info": {
+          "package_name": "com.example.sample"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEsrscUufaPN01F7DvQLdZbn8nO_iSKf4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
