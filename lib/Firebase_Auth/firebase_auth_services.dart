@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sample/Firebase_Auth/session_manager.dart';
 import '../common/toast.dart';
-import 'session_manager.dart';
 
 class FirebaseAuthServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -43,6 +42,7 @@ class FirebaseAuthServices {
       }
       return null;
     }
+    return null;
   }
 
 }

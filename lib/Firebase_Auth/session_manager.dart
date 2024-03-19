@@ -8,7 +8,5 @@ class SessionController {
     return _session;
   }
 
-  SessionController._internal(){
-
-  }
+  SessionController._internal();
 }

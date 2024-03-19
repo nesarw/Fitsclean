@@ -34,7 +34,7 @@ class _HomepageState extends State<Homepage> {
       appBar: AppBar(
         backgroundColor: Colors.red[400],
         title: Container(
-          child: Column(
+          child: const Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
@@ -75,7 +75,7 @@ class _HomepageState extends State<Homepage> {
                   stream: ref.snapshots(),
                   builder: (context, AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> snapshot) {
                     if (!snapshot.hasData) {
-                      return Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator());
                     } else if (snapshot.hasData) {
                       final userData = snapshot.data!.data();
                       return Column(
@@ -87,7 +87,7 @@ class _HomepageState extends State<Homepage> {
                           ),
                           Text(
                             "Welcome to Fitsclean ${userData?['Name'] ?? ''},",
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 22.0,
                               fontFamily: 'Roboto',
                               fontWeight: FontWeight.bold,
@@ -561,7 +561,7 @@ class _HomepageState extends State<Homepage> {
                         ],
                       );
                     } else {
-                      return Center(child: Text('No data'));
+                      return const Center(child: Text('No data'));
                     }
                   },
                 ),

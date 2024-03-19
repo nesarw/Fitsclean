@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +66,7 @@ class _userprofileState extends State<userprofile> {
                   stream: ref.snapshots(),
                   builder: (context, AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> snapshot) {
                     if (!snapshot.hasData) {
-                      return Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator());
                     } else if (snapshot.hasData) {
                       final userData = snapshot.data!.data();
                       _namecontroller.text = userData?['Name'] ?? '';
@@ -153,7 +152,7 @@ class _userprofileState extends State<userprofile> {
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 labelText: 'Name',
-                                labelStyle: TextStyle(
+                                labelStyle: const TextStyle(
                                   fontSize: 10.0,
                                   fontFamily: 'Roboto',
                                 ),
@@ -161,7 +160,7 @@ class _userprofileState extends State<userprofile> {
                                   minHeight: 40, // You can adjust this value to decrease or increase the height
                                   maxHeight: 40, // You can adjust this value to decrease or increase the height
                                 ),
-                                contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                               ),
                             ),
                           ),
@@ -193,7 +192,7 @@ class _userprofileState extends State<userprofile> {
                                   minHeight: 40, // You can adjust this value to decrease or increase the height
                                   maxHeight: 40, // You can adjust this value to decrease or increase the height
                                 ),
-                                contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                               ),
                               keyboardType: TextInputType.number,
                               inputFormatters: [
@@ -229,7 +228,7 @@ class _userprofileState extends State<userprofile> {
                                   minHeight: 40, // You can adjust this value to decrease or increase the height
                                   maxHeight: 40, // You can adjust this value to decrease or increase the height
                                 ),
-                                contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                               ),
                             ),
                           ),
@@ -262,7 +261,7 @@ class _userprofileState extends State<userprofile> {
                                   minHeight: 40, // You can adjust this value to decrease or increase the height
                                   maxHeight: 40, // You can adjust this value to decrease or increase the height
                                 ),
-                                contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                               ),
                             ),
                           ),
@@ -364,7 +363,7 @@ class _userprofileState extends State<userprofile> {
                         ],
                       );
                     } else {
-                      return Center(child: Text('No data'));
+                      return const Center(child: Text('No data'));
                     }
                   },
                 ),
