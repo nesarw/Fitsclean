@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sample/common/toast.dart';
 import 'CreateAccount.dart';
 import 'Firebase_Auth/firebase_auth_services.dart';
@@ -112,7 +113,7 @@ class _loginState extends State<login> {
                     fontFamily: 'Roboto',
                   ),
                   suffixIcon: IconButton(
-                    icon: const Icon(Icons.remove_red_eye),// Add this line to add the password show icon
+                    icon: Icon(MdiIcons.eye),// Add this line to add the password show icon
                     onPressed: () {
                       // Add your on pressed event here
                     },

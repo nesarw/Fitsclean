@@ -1,14 +1,57 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:uuid/uuid.dart';
+import 'Firebase_Auth/session_manager.dart';
 import 'Homepage.dart';
+import 'common/toast.dart';
 import 'servicetracking.dart';
 import 'package:flutter/material.dart';
-import 'package:input_quantity/input_quantity.dart';
+import 'package:intl/intl.dart';
 
-void main() => runApp(const MaterialApp(
-  home: bookservice(),
-));
 
-class bookservice extends StatelessWidget {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();// initialize Flutter binding
+  runApp(const MaterialApp(
+    home: bookservice(),
+  ));
+}
+
+class bookservice extends StatefulWidget {
   const bookservice({super.key});
+
+  @override
+  State<bookservice> createState() => _bookserviceState();
+}
+
+class _bookserviceState extends State<bookservice> {
+
+  final _firestore = FirebaseFirestore.instance;
+
+  String? userId = SessionController().userId;
+
+
+  //male
+  TextEditingController _mtshirt = TextEditingController(text: '0');
+  TextEditingController _mshirt = TextEditingController(text: '0');
+  TextEditingController _mpant = TextEditingController(text: '0');
+  TextEditingController _msuits = TextEditingController(text: '0');
+  TextEditingController _mtraditional = TextEditingController(text: '0');
+
+  //female
+  TextEditingController _ftshirt = TextEditingController(text: '0');
+  TextEditingController _fkurta = TextEditingController(text: '0');
+  TextEditingController _fpant = TextEditingController(text: '0');
+  TextEditingController _fsaree = TextEditingController(text: '0');
+
+  //kids
+  TextEditingController _ktshirt = TextEditingController(text: '0');
+  TextEditingController _kshirt = TextEditingController(text: '0');
+  TextEditingController _kpant = TextEditingController(text: '0');
+  TextEditingController _ktoddler = TextEditingController(text: '0');
+  TextEditingController _kethinic = TextEditingController(text: '0');
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +106,7 @@ class bookservice extends StatelessWidget {
                     Container(
                       child: Column(
                         children: [
+
                           //add the expansion tiles here
                           ExpansionTile(
                             title: const Text(
@@ -73,6 +117,7 @@ class bookservice extends StatelessWidget {
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
+
                             children: [
                               Container(
                                 margin: const EdgeInsets.symmetric(vertical: 10),
@@ -117,17 +162,44 @@ class bookservice extends StatelessWidget {
                                                     ],
                                                   ),
                                                 ),
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
+                                            Expanded(
+                                              flex: 2,
+                                              child: SizedBox(
+                                                width: 20,
+                                                height: 35,
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: <Widget>[
+                                                    IconButton(onPressed: () {
+                                                      setState(() {
+                                                        _mtshirt.text = (int.parse(_mtshirt.text) + 1).toString();
+                                                      });
+                                                    },
+                                                      icon: Icon(MdiIcons.plus),
+                                                      iconSize: 20,),
+                                                    Expanded(
+                                                      child: TextFormField(
+                                                        readOnly: true,
+                                                        controller: _mtshirt,
+                                                        decoration: InputDecoration(
+                                                          border: OutlineInputBorder(
+                                                            borderRadius: BorderRadius.circular(5),
+                                                          ),
+                                                        ),
+                                                        textAlign: TextAlign.center,
+                                                      ),
+                                                    ),
+                                                    IconButton(onPressed: () {
+                                                      setState(() {
+                                                        int newValue = int.parse(_mtshirt.text) - 1;
+                                                        if (newValue >= 0) {
+                                                          setState(() {
+                                                            _mtshirt.text = newValue.toString();
+                                                          });
+                                                        }
+                                                      });
+                                                    }, icon: Icon(MdiIcons.minus),iconSize: 20),
+                                                  ],
                                                     ),
                                                   ),
                                                 ),
@@ -175,16 +247,43 @@ class bookservice extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 1,
+                                                  flex: 2,
                                                   child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
+                                                    width: 20,
+                                                    height: 35,
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: <Widget>[
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            _mshirt.text = (int.parse(_mshirt.text) + 1).toString();
+                                                          });
+                                                        },
+                                                          icon: Icon(MdiIcons.plus),
+                                                          iconSize: 20,),
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            readOnly: true,
+                                                            controller: _mshirt,
+                                                            decoration: InputDecoration(
+                                                              border: OutlineInputBorder(
+                                                                borderRadius: BorderRadius.circular(5),
+                                                              ),
+                                                            ),
+                                                            textAlign: TextAlign.center,
+                                                          ),
+                                                        ),
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            int newValue = int.parse(_mshirt.text) - 1;
+                                                            if (newValue >= 0) {
+                                                              setState(() {
+                                                                _mshirt.text = newValue.toString();
+                                                              });
+                                                            }
+                                                          });
+                                                        }, icon: Icon(MdiIcons.minus),iconSize: 20),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
@@ -232,16 +331,43 @@ class bookservice extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 1,
+                                                  flex: 2,
                                                   child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
+                                                    width: 20,
+                                                    height: 35,
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: <Widget>[
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            _mpant.text = (int.parse(_mpant.text) + 1).toString();
+                                                          });
+                                                        },
+                                                          icon: Icon(MdiIcons.plus),
+                                                          iconSize: 20,),
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            readOnly: true,
+                                                            controller: _mpant,
+                                                            decoration: InputDecoration(
+                                                              border: OutlineInputBorder(
+                                                                borderRadius: BorderRadius.circular(5),
+                                                              ),
+                                                            ),
+                                                            textAlign: TextAlign.center,
+                                                          ),
+                                                        ),
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            int newValue = int.parse(_mpant.text) - 1;
+                                                            if (newValue >= 0) {
+                                                              setState(() {
+                                                                _mpant.text = newValue.toString();
+                                                              });
+                                                            }
+                                                          });
+                                                        }, icon: Icon(MdiIcons.minus),iconSize: 20),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
@@ -289,16 +415,43 @@ class bookservice extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 1,
+                                                  flex: 2,
                                                   child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
+                                                    width: 20,
+                                                    height: 35,
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: <Widget>[
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            _msuits.text = (int.parse(_msuits.text) + 1).toString();
+                                                          });
+                                                        },
+                                                          icon: Icon(MdiIcons.plus),
+                                                          iconSize: 20,),
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            readOnly: true,
+                                                            controller: _msuits,
+                                                            decoration: InputDecoration(
+                                                              border: OutlineInputBorder(
+                                                                borderRadius: BorderRadius.circular(5),
+                                                              ),
+                                                            ),
+                                                            textAlign: TextAlign.center,
+                                                          ),
+                                                        ),
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            int newValue = int.parse(_msuits.text) - 1;
+                                                            if (newValue >= 0) {
+                                                              setState(() {
+                                                                _msuits.text = newValue.toString();
+                                                              });
+                                                            }
+                                                          });
+                                                        }, icon: Icon(MdiIcons.minus),iconSize: 20),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
@@ -346,16 +499,43 @@ class bookservice extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 1,
+                                                  flex: 2,
                                                   child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
+                                                    width: 20,
+                                                    height: 35,
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: <Widget>[
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            _mtraditional.text = (int.parse(_mtraditional.text) + 1).toString();
+                                                          });
+                                                        },
+                                                          icon: Icon(MdiIcons.plus),
+                                                          iconSize: 20,),
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            readOnly: true,
+                                                            controller: _mtraditional,
+                                                            decoration: InputDecoration(
+                                                              border: OutlineInputBorder(
+                                                                borderRadius: BorderRadius.circular(5),
+                                                              ),
+                                                            ),
+                                                            textAlign: TextAlign.center,
+                                                          ),
+                                                        ),
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            int newValue = int.parse(_mtraditional.text) - 1;
+                                                            if (newValue >= 0) {
+                                                              setState(() {
+                                                                _mtraditional.text = newValue.toString();
+                                                              });
+                                                            }
+                                                          });
+                                                        }, icon: Icon(MdiIcons.minus),iconSize: 20),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
@@ -426,16 +606,43 @@ class bookservice extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 1,
+                                                  flex: 2,
                                                   child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
+                                                    width: 20,
+                                                    height: 35,
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: <Widget>[
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            _ftshirt.text = (int.parse(_ftshirt.text) + 1).toString();
+                                                          });
+                                                        },
+                                                          icon: Icon(MdiIcons.plus),
+                                                          iconSize: 20,),
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            readOnly: true,
+                                                            controller: _ftshirt,
+                                                            decoration: InputDecoration(
+                                                              border: OutlineInputBorder(
+                                                                borderRadius: BorderRadius.circular(5),
+                                                              ),
+                                                            ),
+                                                            textAlign: TextAlign.center,
+                                                          ),
+                                                        ),
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            int newValue = int.parse(_ftshirt.text) - 1;
+                                                            if (newValue >= 0) {
+                                                              setState(() {
+                                                                _ftshirt.text = newValue.toString();
+                                                              });
+                                                            }
+                                                          });
+                                                        }, icon: Icon(MdiIcons.minus),iconSize: 20),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
@@ -483,16 +690,43 @@ class bookservice extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 1,
+                                                  flex: 2,
                                                   child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
+                                                    width: 20,
+                                                    height: 35,
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: <Widget>[
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            _fkurta.text = (int.parse(_fkurta.text) + 1).toString();
+                                                          });
+                                                        },
+                                                          icon: Icon(MdiIcons.plus),
+                                                          iconSize: 20,),
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            controller: _fkurta,
+                                                            readOnly: true,
+                                                            decoration: InputDecoration(
+                                                              border: OutlineInputBorder(
+                                                                borderRadius: BorderRadius.circular(5),
+                                                              ),
+                                                            ),
+                                                            textAlign: TextAlign.center,
+                                                          ),
+                                                        ),
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            int newValue = int.parse(_fkurta.text) - 1;
+                                                            if (newValue >= 0) {
+                                                              setState(() {
+                                                                _fkurta.text = newValue.toString();
+                                                              });
+                                                            }
+                                                          });
+                                                        }, icon: Icon(MdiIcons.minus),iconSize: 20),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
@@ -540,16 +774,43 @@ class bookservice extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 1,
+                                                  flex: 2,
                                                   child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
+                                                    width: 20,
+                                                    height: 35,
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: <Widget>[
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            _fpant.text = (int.parse(_fpant.text) + 1).toString();
+                                                          });
+                                                        },
+                                                          icon: Icon(MdiIcons.plus),
+                                                          iconSize: 20,),
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            controller: _fpant,
+                                                            readOnly: true,
+                                                            decoration: InputDecoration(
+                                                              border: OutlineInputBorder(
+                                                                borderRadius: BorderRadius.circular(5),
+                                                              ),
+                                                            ),
+                                                            textAlign: TextAlign.center,
+                                                          ),
+                                                        ),
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            int newValue = int.parse(_fpant.text) - 1;
+                                                            if (newValue >= 0) {
+                                                              setState(() {
+                                                                _fpant.text = newValue.toString();
+                                                              });
+                                                            }
+                                                          });
+                                                        }, icon: Icon(MdiIcons.minus),iconSize: 20),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
@@ -597,16 +858,43 @@ class bookservice extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 1,
+                                                  flex: 2,
                                                   child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
+                                                    width: 20,
+                                                    height: 35,
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: <Widget>[
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            _fsaree.text = (int.parse(_fsaree.text) + 1).toString();
+                                                          });
+                                                        },
+                                                          icon: Icon(MdiIcons.plus),
+                                                          iconSize: 20,),
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            controller: _fsaree,
+                                                            readOnly: true,
+                                                            decoration: InputDecoration(
+                                                              border: OutlineInputBorder(
+                                                                borderRadius: BorderRadius.circular(5),
+                                                              ),
+                                                            ),
+                                                            textAlign: TextAlign.center,
+                                                          ),
+                                                        ),
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            int newValue = int.parse(_fsaree.text) - 1;
+                                                            if (newValue >= 0) {
+                                                              setState(() {
+                                                                _fsaree.text = newValue.toString();
+                                                              });
+                                                            }
+                                                          });
+                                                        }, icon: Icon(MdiIcons.minus),iconSize: 20),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
@@ -677,16 +965,43 @@ class bookservice extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 1,
+                                                  flex: 2,
                                                   child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
+                                                    width: 20,
+                                                    height: 35,
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: <Widget>[
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            _ktshirt.text = (int.parse(_ktshirt.text) + 1).toString();
+                                                          });
+                                                        },
+                                                          icon: Icon(MdiIcons.plus),
+                                                          iconSize: 20,),
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            controller: _ktshirt,
+                                                            readOnly: true,
+                                                            decoration: InputDecoration(
+                                                              border: OutlineInputBorder(
+                                                                borderRadius: BorderRadius.circular(5),
+                                                              ),
+                                                            ),
+                                                            textAlign: TextAlign.center,
+                                                          ),
+                                                        ),
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            int newValue = int.parse(_ktshirt.text) - 1;
+                                                            if (newValue >= 0) {
+                                                              setState(() {
+                                                                _ktshirt.text = newValue.toString();
+                                                              });
+                                                            }
+                                                          });
+                                                        }, icon: Icon(MdiIcons.minus),iconSize: 20),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
@@ -734,16 +1049,43 @@ class bookservice extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 1,
+                                                  flex: 2,
                                                   child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
+                                                    width: 20,
+                                                    height: 35,
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: <Widget>[
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            _kshirt.text = (int.parse(_kshirt.text) + 1).toString();
+                                                          });
+                                                        },
+                                                          icon: Icon(MdiIcons.plus),
+                                                          iconSize: 20,),
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            controller: _kshirt,
+                                                            readOnly: true,
+                                                            decoration: InputDecoration(
+                                                              border: OutlineInputBorder(
+                                                                borderRadius: BorderRadius.circular(5),
+                                                              ),
+                                                            ),
+                                                            textAlign: TextAlign.center,
+                                                          ),
+                                                        ),
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            int newValue = int.parse(_kshirt.text) - 1;
+                                                            if (newValue >= 0) {
+                                                              setState(() {
+                                                                _kshirt.text = newValue.toString();
+                                                              });
+                                                            }
+                                                          });
+                                                        }, icon: Icon(MdiIcons.minus),iconSize: 20),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
@@ -791,16 +1133,43 @@ class bookservice extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 1,
+                                                  flex: 2,
                                                   child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
+                                                    width: 20,
+                                                    height: 35,
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: <Widget>[
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            _kpant.text = (int.parse(_kpant.text) + 1).toString();
+                                                          });
+                                                        },
+                                                          icon: Icon(MdiIcons.plus),
+                                                          iconSize: 20,),
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            controller: _kpant,
+                                                            readOnly: true,
+                                                            decoration: InputDecoration(
+                                                              border: OutlineInputBorder(
+                                                                borderRadius: BorderRadius.circular(5),
+                                                              ),
+                                                            ),
+                                                            textAlign: TextAlign.center,
+                                                          ),
+                                                        ),
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            int newValue = int.parse(_kpant.text) - 1;
+                                                            if (newValue >= 0) {
+                                                              setState(() {
+                                                                _kpant.text = newValue.toString();
+                                                              });
+                                                            }
+                                                          });
+                                                        }, icon: Icon(MdiIcons.minus),iconSize: 20),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
@@ -848,16 +1217,43 @@ class bookservice extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 1,
+                                                  flex: 2,
                                                   child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
+                                                    width: 20,
+                                                    height: 35,
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: <Widget>[
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            _ktoddler.text = (int.parse(_ktoddler.text) + 1).toString();
+                                                          });
+                                                        },
+                                                          icon: Icon(MdiIcons.plus),
+                                                          iconSize: 20,),
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            controller: _ktoddler,
+                                                            readOnly: true,
+                                                            decoration: InputDecoration(
+                                                              border: OutlineInputBorder(
+                                                                borderRadius: BorderRadius.circular(5),
+                                                              ),
+                                                            ),
+                                                            textAlign: TextAlign.center,
+                                                          ),
+                                                        ),
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            int newValue = int.parse(_ktoddler.text) - 1;
+                                                            if (newValue >= 0) {
+                                                              setState(() {
+                                                                _ktoddler.text = newValue.toString();
+                                                              });
+                                                            }
+                                                          });
+                                                        }, icon: Icon(MdiIcons.minus),iconSize: 20),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
@@ -905,16 +1301,43 @@ class bookservice extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 1,
+                                                  flex: 2,
                                                   child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
+                                                    width: 20,
+                                                    height: 35,
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      children: <Widget>[
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            _kethinic.text = (int.parse(_kethinic.text) + 1).toString();
+                                                          });
+                                                        },
+                                                          icon: Icon(MdiIcons.plus),
+                                                          iconSize: 20,),
+                                                        Expanded(
+                                                          child: TextFormField(
+                                                            controller: _kethinic,
+                                                            readOnly: true,
+                                                            decoration: InputDecoration(
+                                                              border: OutlineInputBorder(
+                                                                borderRadius: BorderRadius.circular(5),
+                                                              ),
+                                                            ),
+                                                            textAlign: TextAlign.center,
+                                                          ),
+                                                        ),
+                                                        IconButton(onPressed: () {
+                                                          setState(() {
+                                                            int newValue = int.parse(_kethinic.text) - 1;
+                                                            if (newValue >= 0) {
+                                                              setState(() {
+                                                                _kethinic.text = newValue.toString();
+                                                              });
+                                                            }
+                                                          });
+                                                        }, icon: Icon(MdiIcons.minus),iconSize: 20),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
@@ -1011,13 +1434,7 @@ class bookservice extends StatelessWidget {
             alignment: Alignment.center,
             height: 55.0,
             child: ElevatedButton(
-              onPressed: () {
-                // Add your on pressed event here
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Servicetracking()),
-                );
-              },
+              onPressed: _onBookNow,
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white, backgroundColor: Colors.red[400],
                 shape: RoundedRectangleBorder(
@@ -1038,6 +1455,81 @@ class bookservice extends StatelessWidget {
 
         ],
       ),
+    );
+  }
+
+
+
+  void _onBookNow() async {
+    // Generate a new random order ID
+    final orderId = const Uuid().v4();
+    final user = FirebaseAuth.instance.currentUser!;
+    final userId = user.uid;
+
+    // Initialize an empty list of items to store the non-zero values
+    final items = <String, dynamic>{};
+
+    if (int.parse(_mtshirt.text) > 0) items['mtshirt'] = int.parse(_mtshirt.text);
+    if (int.parse(_mshirt.text) > 0) items['mshirt'] = int.parse(_mshirt.text);
+    if (int.parse(_mpant.text) > 0) items['mpant'] = int.parse(_mpant.text);
+    if (int.parse(_msuits.text) > 0) items['msuits'] = int.parse(_msuits.text);
+    if (int.parse(_mtraditional.text) > 0) items['mtraditional'] = int.parse(_mtraditional.text);
+    if (int.parse(_ftshirt.text) > 0) items['ftshirt'] = int.parse(_ftshirt.text);
+    if (int.parse(_fkurta.text) > 0) items['fkurta'] = int.parse(_fkurta.text);
+    if (int.parse(_fpant.text) > 0) items['fpant'] = int.parse(_fpant.text);
+    if (int.parse(_fsaree.text) > 0) items['fsaree'] = int.parse(_fsaree.text);
+    if (int.parse(_ktshirt.text) > 0) items['ktshirt'] = int.parse(_ktshirt.text);
+    if (int.parse(_kshirt.text) > 0) items['kshirt'] = int.parse(_kshirt.text);
+    if (int.parse(_kpant.text) > 0) items['kpant'] = int.parse(_kpant.text);
+    if (int.parse(_ktoddler.text) > 0) items['ktoddlervalue'] = int.parse(_ktoddler.text);
+    if (int.parse(_kethinic.text) > 0) items['kethinic'] = int.parse(_kethinic.text);
+
+    if (items.isEmpty) {
+      showToast(message: "Please select at least one item to continue.");
+      return;
+    }
+
+    // Add the user ID and order ID to the items list
+    items['userId'] = userId;
+    items['orderId'] = orderId;
+    items['orderStatus'] = 'ordered';
+    final timestamp = DateTime.now().toUtc().millisecondsSinceEpoch;
+    items['timestamp'] = DateFormat('MMM d, y h:mm:ss a').format(DateTime.fromMillisecondsSinceEpoch(timestamp));
+
+    // Get the selected date and time
+    DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2022),
+      lastDate: DateTime(2025),
+    );
+
+    TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+
+    // If a date and time were selected, add them to the items list
+    if (pickedDate != null && pickedTime != null) {
+      final DateTime dateTime = DateTime(
+        pickedDate.year,
+        pickedDate.month,
+        pickedDate.day,
+        pickedTime.hour,
+        pickedTime.minute,
+      );
+
+      items['Order Date and Time'] = dateTime;
+    }
+
+    // Store the items in the Firestore database
+    await _firestore.collection('Order').doc(orderId).set(items);
+
+    // Show a toast message and navigate to the next screen
+    showToast(message: "Laundry Booked.");
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const Servicetracking()),
     );
   }
 }
