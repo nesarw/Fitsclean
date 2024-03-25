@@ -34,24 +34,24 @@ class _bookserviceState extends State<bookservice> {
 
 
   //male
-  TextEditingController _mtshirt = TextEditingController(text: '0');
-  TextEditingController _mshirt = TextEditingController(text: '0');
-  TextEditingController _mpant = TextEditingController(text: '0');
-  TextEditingController _msuits = TextEditingController(text: '0');
-  TextEditingController _mtraditional = TextEditingController(text: '0');
+  final TextEditingController _mtshirt = TextEditingController(text: '0');
+  final TextEditingController _mshirt = TextEditingController(text: '0');
+  final TextEditingController _mpant = TextEditingController(text: '0');
+  final TextEditingController _msuits = TextEditingController(text: '0');
+  final TextEditingController _mtraditional = TextEditingController(text: '0');
 
   //female
-  TextEditingController _ftshirt = TextEditingController(text: '0');
-  TextEditingController _fkurta = TextEditingController(text: '0');
-  TextEditingController _fpant = TextEditingController(text: '0');
-  TextEditingController _fsaree = TextEditingController(text: '0');
+  final TextEditingController _ftshirt = TextEditingController(text: '0');
+  final TextEditingController _fkurta = TextEditingController(text: '0');
+  final TextEditingController _fpant = TextEditingController(text: '0');
+  final TextEditingController _fsaree = TextEditingController(text: '0');
 
   //kids
-  TextEditingController _ktshirt = TextEditingController(text: '0');
-  TextEditingController _kshirt = TextEditingController(text: '0');
-  TextEditingController _kpant = TextEditingController(text: '0');
-  TextEditingController _ktoddler = TextEditingController(text: '0');
-  TextEditingController _kethinic = TextEditingController(text: '0');
+  final TextEditingController _ktshirt = TextEditingController(text: '0');
+  final TextEditingController _kshirt = TextEditingController(text: '0');
+  final TextEditingController _kpant = TextEditingController(text: '0');
+  final TextEditingController _ktoddler = TextEditingController(text: '0');
+  final TextEditingController _kethinic = TextEditingController(text: '0');
 
   @override
   Widget build(BuildContext context) {

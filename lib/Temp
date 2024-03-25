@@ -1,558 +1,113 @@
-ExpansionTile(
-                            title: const Text(
-                              'Female',
-                              style: TextStyle(
-                                fontSize: 20.0, // Increase the font size here
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.normal,
-                              ),
+Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                child: Card(
+                  clipBehavior: Clip.hardEdge,
+                  child: InkWell(
+                    splashColor: Colors.redAccent.withAlpha(30),
+                    onTap: () {
+                      debugPrint('Card tapped.');
+                    },
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 100,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Center(
+                                  child: RichText(
+                                    text: TextSpan(
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                      children: [
+                                        TextSpan(text: 'Order Id:\n'),
+                                        TextSpan(text: data['orderId']),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.symmetric(vertical: 10),
-                                height: 435,
-                                child: ListView(
-                                  scrollDirection: Axis.vertical,
-                                  children: <Widget>[
-                                    Container(
-                                      child: Card(
-                                        clipBehavior: Clip.hardEdge,
-                                        child: InkWell(
-                                          splashColor: Colors.redAccent.withAlpha(30),
-                                          onTap: () {
-                                            debugPrint('Card tapped.');
-                                          },
-                                          child: SizedBox(
-                                            width: 200,
-                                            height: 100,
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Image.asset(
-                                                    'Assets/shirt.png',
-                                                    width: 100,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                                const Expanded(
-                                                  flex: 2,
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: [
-                                                      Center(
-                                                        child: Text(
-                                                          'Tshirts/Shirts',
-                                                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                                        ),
-                                                      ),
-
-                                                    ],
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Center(
+                                  child: RichText(
+                                    text: TextSpan(
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
                                       ),
+                                      children: [
+                                        TextSpan(text: 'Order Status:\n'),
+                                        TextSpan(text: data['orderStatus'] ?? 'N/A')
+                                      ],
                                     ),
-                                    Container(
-                                      child: Card(
-                                        clipBehavior: Clip.hardEdge,
-                                        child: InkWell(
-                                          splashColor: Colors.redAccent.withAlpha(30),
-                                          onTap: () {
-                                            debugPrint('Card tapped.');
-                                          },
-                                          child: SizedBox(
-                                            width: 200,
-                                            height: 100,
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Image.asset(
-                                                    'Assets/kurta.png',
-                                                    width: 100,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                                const Expanded(
-                                                  flex: 2,
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: [
-                                                      Center(
-                                                        child: Text(
-                                                          'Kurtas',
-                                                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                                        ),
-                                                      ),
-
-                                                    ],
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      child: Card(
-                                        clipBehavior: Clip.hardEdge,
-                                        child: InkWell(
-                                          splashColor: Colors.redAccent.withAlpha(30),
-                                          onTap: () {
-                                            debugPrint('Card tapped.');
-                                          },
-                                          child: SizedBox(
-                                            width: 200,
-                                            height: 100,
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Image.asset(
-                                                    'Assets/pants.png',
-                                                    width: 100,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                                const Expanded(
-                                                  flex: 2,
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: [
-                                                      Center(
-                                                        child: Text(
-                                                          'Pants/Trousers',
-                                                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                                        ),
-                                                      ),
-
-                                                    ],
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      child: Card(
-                                        clipBehavior: Clip.hardEdge,
-                                        child: InkWell(
-                                          splashColor: Colors.redAccent.withAlpha(30),
-                                          onTap: () {
-                                            debugPrint('Card tapped.');
-                                          },
-                                          child: SizedBox(
-                                            width: 200,
-                                            height: 100,
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Image.asset(
-                                                    'Assets/sarees.png',
-                                                    width: 100,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                                const Expanded(
-                                                  flex: 2,
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: [
-                                                      Center(
-                                                        child: Text(
-                                                          'Sarees',
-                                                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                                        ),
-                                                      ),
-
-                                                    ],
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                  ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // Add your on pressed event here
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Servicetracking()),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                backgroundColor: Colors.red[400],
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                fixedSize: const Size(100, 40),
+                              ),
+                              child:const Text(
+                                'Track Service',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontFamily: 'Roboto',
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            ],
-                          ),
-
-ExpansionTile(
-                            title: const Text(
-                              'Kids',
-                              style: TextStyle(
-                                fontSize: 20.0, // Increase the font size here
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.normal,
-                              ),
                             ),
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.symmetric(vertical: 10),
-                                height: 435,
-                                child: ListView(
-                                  scrollDirection: Axis.vertical,
-                                  children: <Widget>[
-                                    Container(
-                                      child: Card(
-                                        clipBehavior: Clip.hardEdge,
-                                        child: InkWell(
-                                          splashColor: Colors.redAccent.withAlpha(30),
-                                          onTap: () {
-                                            debugPrint('Card tapped.');
-                                          },
-                                          child: SizedBox(
-                                            width: 200,
-                                            height: 100,
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Image.asset(
-                                                    'Assets/ktshirt.png',
-                                                    width: 100,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                                const Expanded(
-                                                  flex: 2,
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: [
-                                                      Center(
-                                                        child: Text(
-                                                          'TShirts',
-                                                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                                        ),
-                                                      ),
-
-                                                    ],
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      child: Card(
-                                        clipBehavior: Clip.hardEdge,
-                                        child: InkWell(
-                                          splashColor: Colors.redAccent.withAlpha(30),
-                                          onTap: () {
-                                            debugPrint('Card tapped.');
-                                          },
-                                          child: SizedBox(
-                                            width: 200,
-                                            height: 100,
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Image.asset(
-                                                    'Assets/shirt.png',
-                                                    width: 100,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                                const Expanded(
-                                                  flex: 2,
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: [
-                                                      Center(
-                                                        child: Text(
-                                                          'Shirts',
-                                                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                                        ),
-                                                      ),
-
-                                                    ],
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      child: Card(
-                                        clipBehavior: Clip.hardEdge,
-                                        child: InkWell(
-                                          splashColor: Colors.redAccent.withAlpha(30),
-                                          onTap: () {
-                                            debugPrint('Card tapped.');
-                                          },
-                                          child: SizedBox(
-                                            width: 200,
-                                            height: 100,
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Image.asset(
-                                                    'Assets/pants.png',
-                                                    width: 100,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                                const Expanded(
-                                                  flex: 2,
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: [
-                                                      Center(
-                                                        child: Text(
-                                                          'Shorts/Jeans',
-                                                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                                        ),
-                                                      ),
-
-                                                    ],
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      child: Card(
-                                        clipBehavior: Clip.hardEdge,
-                                        child: InkWell(
-                                          splashColor: Colors.redAccent.withAlpha(30),
-                                          onTap: () {
-                                            debugPrint('Card tapped.');
-                                          },
-                                          child: SizedBox(
-                                            width: 200,
-                                            height: 100,
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Image.asset(
-                                                    'Assets/toddler.png',
-                                                    width: 100,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                                const Expanded(
-                                                  flex: 2,
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: [
-                                                      Center(
-                                                        child: Text(
-                                                          'Toddlers',
-                                                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                                        ),
-                                                      ),
-
-                                                    ],
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      child: Card(
-                                        clipBehavior: Clip.hardEdge,
-                                        child: InkWell(
-                                          splashColor: Colors.redAccent.withAlpha(30),
-                                          onTap: () {
-                                            debugPrint('Card tapped.');
-                                          },
-                                          child: SizedBox(
-                                            width: 200,
-                                            height: 100,
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Image.asset(
-                                                    'Assets/ktkurta.png',
-                                                    width: 100,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                                const Expanded(
-                                                  flex: 2,
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: [
-                                                      Center(
-                                                        child: Text(
-                                                          'Ethinic Wear',
-                                                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                                        ),
-                                                      ),
-
-                                                    ],
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: SizedBox(
-                                                    width: 30,
-                                                    height: 30,
-                                                    child: InputQty(
-                                                      maxVal: double.maxFinite,
-                                                      initVal: 0,
-                                                      onQtyChanged: (val) {
-                                                        // setstate could be called here
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                  ],
-                                ),
-                              ),
-                            ],
                           ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+
+
+
+
+
+
+
+
+
+              Text(
+                              "Order Id: ${data['orderId']}",
+                              style: const TextStyle(
+                                fontSize: 25.0,
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.bold,
+                              ),
+                            );
