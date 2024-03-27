@@ -1,14 +1,53 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:sample/servicehistory.dart';
+import 'Firebase_Auth/session_manager.dart';
 import 'Homepage.dart';
 import 'package:order_tracker/order_tracker.dart';
 
-void main() => runApp(const MaterialApp(
-  home: Servicetracking(),
-));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();// initialize Flutter binding
 
-class Servicetracking extends StatelessWidget {
-  const Servicetracking({super.key});
+  String orderId = "some-order-id-value";
 
+  runApp(MaterialApp(
+    home: Servicetracking(orderId: orderId),
+  ));
+}
+
+class Servicetracking extends StatefulWidget {
+  final String orderId;
+
+  Servicetracking({required this.orderId});
+
+  @override
+  State<Servicetracking> createState() => _ServicetrackingState();
+}
+
+class _ServicetrackingState extends State<Servicetracking> {
+  @override
+  Widget build(BuildContext context) {
+    if (widget.orderId.isNotEmpty) {
+      return TrackingScreen(orderId: widget.orderId);
+    } else {
+      return Center(
+        child: Text('No order ID provided'),
+      );
+    }
+  }
+}
+
+class TrackingScreen extends StatefulWidget {
+  final String orderId;
+
+  TrackingScreen({required this.orderId});
+
+  @override
+  _TrackingScreenState createState() => _TrackingScreenState();
+}
+
+class _TrackingScreenState extends State<TrackingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +68,7 @@ class Servicetracking extends StatelessWidget {
             // Add your onPressed event here
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const Homepage()),
+              MaterialPageRoute(builder: (context) => const serivcehistory()),
             );
           },
         ),
@@ -41,7 +80,7 @@ class Servicetracking extends StatelessWidget {
             height: 20, // Add this line to add space between the text fields
           ),
           const Text(
-            "Order Tracking",
+            "Order Details",
             style: TextStyle(
               fontSize: 30.0,
               fontFamily: 'Roboto',
@@ -51,25 +90,44 @@ class Servicetracking extends StatelessWidget {
           const SizedBox(
             height: 25, // Add this line to add space between the text fields
           ),
-            Padding(
-              padding: const EdgeInsets.only(left: 0), // Set the left margin here
-              child: SizedBox(
-                width: 300, // Set the width here
-                height: 500, // Set the height here
-                child: OrderTracker(
-                  status: Status.shipped,
-                  activeColor: Colors.red[400],
-                  inActiveColor: Colors.white,
-                  orderTitleAndDateList: orderList,
-                  shippedTitleAndDateList: shippedList,
-                  outOfDeliveryTitleAndDateList: outOfDeliveryList,
-                  deliveredTitleAndDateList: deliveredList,
-                ),
-              ),
+          Text('Order ID: ${widget.orderId}',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
             ),
+          ),
           const SizedBox(
             height: 15, // Add this line to add space between the text fields
           ),
+          const Text(
+            "Order Status",
+            style: TextStyle(
+              fontSize: 30.0,
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(
+            height: 25, // Add this line to add space between the text fields
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 0), // Set the left margin here
+            child: SizedBox(
+              width: 300, // Set the width here
+              height: 400, // Set the height here
+              child: OrderTracker(
+                status: Status.order,
+                activeColor: Colors.red[400],
+                inActiveColor: Colors.white,
+                orderTitleAndDateList: orderList,
+                shippedTitleAndDateList: shippedList,
+                outOfDeliveryTitleAndDateList: outOfDeliveryList,
+                deliveredTitleAndDateList: deliveredList,
+              ),
+            ),
+          ),
+
           Center(
             child: ElevatedButton(
               onPressed: () {
@@ -99,19 +157,17 @@ class Servicetracking extends StatelessWidget {
 }
 
 List<TextDto> orderList = [
-  TextDto("The delivery partner is out for pickup", ""),
-  TextDto("Your item has been picked up by delivery partner.", ""),
+  TextDto("Order Placed.", ""),
 ];
 
 List<TextDto> shippedList = [
-  TextDto("Your item has been received in the nearest hub to you.", null),
-  TextDto("Your laundry order is currently being prepared and will soon be ready for delivery.", null),
+  TextDto("Order Shipped.", ""),
 ];
 
 List<TextDto> outOfDeliveryList = [
-  TextDto("Your laundry order is currently out for delivery.",""),
+  TextDto("Order Out for Delivery.", ""),
 ];
 
 List<TextDto> deliveredList = [
-  TextDto("Your laundry order has been delivered successfully. We value your feedback!", ""),
+  TextDto("Order Delivered.", ""),
 ];

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sample/Firebase_Auth/database.dart';
+import 'package:sample/servicetracking.dart';
 import 'Firebase_Auth/session_manager.dart';
 import 'bookservice.dart';
 import 'Homepage.dart';
@@ -122,12 +123,12 @@ class _serivcehistoryState extends State<serivcehistory> {
                             flex: 2,
                             child: ElevatedButton(
                               onPressed: () {
-                                // Add your on pressed event here
-                                // Navigator.pushReplacement(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //       builder: (context) => const Servicetracking()),
-                                // );
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Servicetracking(orderId: data['orderId']),
+                                  ),
+                                );
                               },
                               style: ElevatedButton.styleFrom(
                                 foregroundColor: Colors.white,

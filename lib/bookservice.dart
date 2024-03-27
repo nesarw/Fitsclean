@@ -1527,9 +1527,9 @@ class _bookserviceState extends State<bookservice> {
 
     // Show a toast message and navigate to the next screen
     showToast(message: "Laundry Booked.");
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const Servicetracking()),
-    );
+    // Navigator.pushReplacement(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => const Servicetracking()),
+    // );
   }
 }
