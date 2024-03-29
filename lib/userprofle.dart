@@ -93,12 +93,12 @@ class _userprofileState extends State<userprofile> {
                           const SizedBox(
                             height: 10, // Add this line to add space between the text fields
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const CircleAvatar(
+                                CircleAvatar(
                                   radius: 78, // Change this radius for the width of the circular border
                                   backgroundColor: Colors.white,
                                   child: CircleAvatar(

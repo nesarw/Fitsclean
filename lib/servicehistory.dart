@@ -49,7 +49,7 @@ class _serivcehistoryState extends State<serivcehistory> {
           return const CircularProgressIndicator();
         }
 
-        return Container(
+        return SizedBox(
           height: MediaQuery.of(context).size.height,
           child: ListView.builder(
             itemCount: snapshot.data!.docs.length,
@@ -79,13 +79,13 @@ class _serivcehistoryState extends State<serivcehistory> {
                                 Center(
                                   child: RichText(
                                     text: TextSpan(
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                       ),
                                       children: [
-                                        TextSpan(text: 'Order Id:\n'),
+                                        const TextSpan(text: 'Order Id:\n'),
                                         TextSpan(text: data['orderId'].length > 15
                                             ? '${data['orderId'].substring(0, 15)}...'
                                             : data['orderId'],),
@@ -104,13 +104,13 @@ class _serivcehistoryState extends State<serivcehistory> {
                                 Center(
                                   child: RichText(
                                     text: TextSpan(
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                       ),
                                       children: [
-                                        TextSpan(text: 'Order Date:\n'),
+                                        const TextSpan(text: 'Order Date:\n'),
                                         TextSpan(text: data['timestamp']?.toDate()?.toString().substring(0, 10) ?? 'N/A')
                                       ],
                                     ),
@@ -127,13 +127,13 @@ class _serivcehistoryState extends State<serivcehistory> {
                                 Center(
                                   child: RichText(
                                     text: TextSpan(
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                       ),
                                       children: [
-                                        TextSpan(text: 'Status:\n'),
+                                        const TextSpan(text: 'Status:\n'),
                                         TextSpan(text: data['orderStatus'] ?? 'N/A')
                                       ],
                                     ),

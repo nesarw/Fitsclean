@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sample/servicehistory.dart';
-import 'Firebase_Auth/session_manager.dart';
-import 'Homepage.dart';
 import 'package:order_tracker/order_tracker.dart';
 
 void main() async {
@@ -23,7 +21,7 @@ void main() async {
 class Servicetracking extends StatefulWidget {
   final String orderId;
 
-  Servicetracking({required this.orderId});
+  const Servicetracking({super.key, required this.orderId});
 
   @override
   State<Servicetracking> createState() => _ServicetrackingState();
@@ -35,7 +33,7 @@ class _ServicetrackingState extends State<Servicetracking> {
     if (widget.orderId.isNotEmpty) {
       return TrackingScreen(orderId: widget.orderId);
     } else {
-      return Center(
+      return const Center(
         child: Text('No order ID provided'),
       );
     }
@@ -45,7 +43,7 @@ class _ServicetrackingState extends State<Servicetracking> {
 class TrackingScreen extends StatefulWidget {
   final String orderId;
 
-  TrackingScreen({required this.orderId});
+  const TrackingScreen({super.key, required this.orderId});
 
   @override
   _TrackingScreenState createState() => _TrackingScreenState();
@@ -158,7 +156,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
         centerTitle: true,
         leading: IconButton(
           icon: IconTheme(
-            data: IconThemeData(color: Colors.white),
+            data: const IconThemeData(color: Colors.white),
             child: Icon(MdiIcons.pagePreviousOutline),
           ),
           onPressed: () {
@@ -178,9 +176,9 @@ class _TrackingScreenState extends State<TrackingScreen> {
           const SizedBox(
             height: 20, // Add this line to add space between the text fields
           ),
-          Center(
+          const Center(
             child: Column(
-              children: const [
+              children: [
                 Text(
                   "Order Details",
                   style: TextStyle(
@@ -200,7 +198,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
+                const Text(
                   'Order ID:',
                   style: TextStyle(
                     fontSize: 16,
@@ -210,49 +208,49 @@ class _TrackingScreenState extends State<TrackingScreen> {
                 ),
                 Text(
                   widget.orderId,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10, // Add this line to add space between the text fields
                 ),
                 Text(
                   'Order Status: $orderStatus',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10, // Add this line to add space between the text fields
                 ),
                 Text(
                   'Order Booked: $orderPDate',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10, // Add this line to add space between the text fields
                 ),
                 Text(
                   'Order Pickup: $orderDate',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10, // Add this line to add space between the text fields
                 ),
-                Text(
+                const Text(
                   'Order List:',
                   style: TextStyle(
                     fontSize: 17,
@@ -268,7 +266,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             if (mtshirt != null)
                               Text(
                                 'Men T-Shirt: $mtshirt',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
@@ -277,7 +275,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             if (mshirt != null)
                               Text(
                                 'Men Shirt: $mshirt',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
@@ -286,7 +284,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             if (mpant != null)
                               Text(
                                 'Men Pants/Shorts: $mpant',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
@@ -295,7 +293,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             if (msuits != null)
                               Text(
                                 'Men Suits/Blazers: $msuits',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
@@ -304,7 +302,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             if (mtraditional != null)
                               Text(
                                 'Men Traditional: $mtraditional',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
@@ -314,7 +312,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             if (ftshirt != null)
                               Text(
                                 'Female T-Shirt: $ftshirt',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
@@ -323,7 +321,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             if (fkurta != null)
                               Text(
                                 'Female Kurtas: $fkurta',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
@@ -332,7 +330,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             if (fpant != null)
                               Text(
                                 'Female Pants/Shorts: $fpant',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
@@ -341,7 +339,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             if (fsaree != null)
                               Text(
                                 'Female Sarees: $fsaree',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
@@ -351,7 +349,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             if (ktshirt != null)
                               Text(
                                 'Kids T-shirts: $ktshirt',
-                                style:TextStyle(
+                                style:const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
@@ -360,7 +358,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             if (kshirt != null)
                               Text(
                                 'Kids Shirts: $kshirt',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
@@ -369,7 +367,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             if (kpant != null)
                               Text(
                                 'Kids Pants/Shorts: $kpant',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
@@ -378,7 +376,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             if (ktoddler != null)
                               Text(
                                 'Kids (Toddlers): $ktoddler',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
@@ -387,7 +385,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             if (kethinic != null)
                               Text(
                                 'Kids Ethinic: $kethinic',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
@@ -399,10 +397,10 @@ class _TrackingScreenState extends State<TrackingScreen> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 25, // Add this line to add space between the text fields
           ),
-          Text(
+          const Text(
             "Order Current Status",
             style: TextStyle(
               fontSize: 30.0,
@@ -410,7 +408,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 25, // Add this line to add space between the text fields
           ),
           Padding(
@@ -451,7 +449,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30, // Add this line to add space between the text fields
           ),
         ],

@@ -50,7 +50,7 @@ class _forgetpasswordState extends State<forgetpassword> {
         centerTitle: true,
         leading: IconButton(
           icon: IconTheme(
-            data: IconThemeData(color: Colors.white),
+            data: const IconThemeData(color: Colors.white),
             child: Icon(MdiIcons.pagePreviousOutline),
           ),
           onPressed: () {
