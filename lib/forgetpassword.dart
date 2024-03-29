@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'common/toast.dart';
 import 'main.dart';
 
@@ -47,7 +48,19 @@ class _forgetpasswordState extends State<forgetpassword> {
           ),
         ),
         centerTitle: true,
-        leading: null,
+        leading: IconButton(
+          icon: IconTheme(
+            data: IconThemeData(color: Colors.white),
+            child: Icon(MdiIcons.pagePreviousOutline),
+          ),
+          onPressed: () {
+            // Add your onPressed event here
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const login()),
+            );
+          },
+        ),
       ),
       body: SingleChildScrollView(
       child:Center(
@@ -81,7 +94,9 @@ class _forgetpasswordState extends State<forgetpassword> {
                     fontSize: 20.0,
                     fontFamily: 'Roboto',
                   ),
+                  prefixIcon: Icon(MdiIcons.email),
                 ),
+
               ),
             ),
             const SizedBox(

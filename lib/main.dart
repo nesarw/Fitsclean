@@ -13,6 +13,7 @@ void main() async {
   await Firebase.initializeApp();// initialize Flutter binding
   runApp(const MaterialApp(
     home: login(),
+    debugShowCheckedModeBanner: false,
   ));
 }
 
@@ -23,6 +24,7 @@ class login extends StatefulWidget {
 }
 
 class _loginState extends State<login> {
+  bool _obscureText = true;
 
   final FirebaseAuthServices _auth = FirebaseAuthServices();
 
@@ -93,6 +95,7 @@ class _loginState extends State<login> {
                     fontSize: 20.0,
                     fontFamily: 'Roboto',
                   ),
+                  prefixIcon: Icon(MdiIcons.email),
                 ),
               ),
             ),
@@ -103,7 +106,7 @@ class _loginState extends State<login> {
               width: 300,
               child: TextField(
                 controller: _passwordcontroller,
-                obscureText: true,
+                obscureText: _obscureText,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -113,10 +116,13 @@ class _loginState extends State<login> {
                     fontSize: 20.0,
                     fontFamily: 'Roboto',
                   ),
+                  prefixIcon: Icon(MdiIcons.lock),
                   suffixIcon: IconButton(
-                    icon: Icon(MdiIcons.eye),// Add this line to add the password show icon
+                    icon: Icon(_obscureText ? MdiIcons.eyeOff : MdiIcons.eye),
                     onPressed: () {
-                      // Add your on pressed event here
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
                     },
                   ),
                 ),

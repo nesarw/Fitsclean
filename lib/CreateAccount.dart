@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:random_string/random_string.dart';
 import 'package:sample/Firebase_Auth/database.dart';
 import 'package:sample/Firebase_Auth/firebase_auth_services.dart';
@@ -27,6 +28,7 @@ class CreateAccount extends StatefulWidget {
 
 class _CreateAccountState extends State<CreateAccount> {
 
+  bool _obscureText = true;
   final FirebaseAuthServices _auth = FirebaseAuthServices();
 
   final TextEditingController _namecontroller = TextEditingController();
@@ -95,6 +97,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     fontSize: 20.0,
                     fontFamily: 'Roboto',
                   ),
+                  prefixIcon: Icon(MdiIcons.account),
                 ),
               ),
             ),
@@ -114,6 +117,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     fontSize: 20.0,
                     fontFamily: 'Roboto',
                   ),
+                  prefixIcon: Icon(MdiIcons.phone),
                 ),
                 keyboardType: TextInputType.number,
                 inputFormatters: [
@@ -137,6 +141,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     fontSize: 20.0,
                     fontFamily: 'Roboto',
                   ),
+                  prefixIcon: Icon(MdiIcons.mapMarker),
                 ),
               ),
             ),
@@ -156,6 +161,7 @@ class _CreateAccountState extends State<CreateAccount> {
                     fontSize: 20.0,
                     fontFamily: 'Roboto',
                   ),
+                  prefixIcon: Icon(MdiIcons.email),
                 ),
               ),
             ),
@@ -166,7 +172,7 @@ class _CreateAccountState extends State<CreateAccount> {
               width: 300,
               child: TextField(
                 controller: _passwordcontroller,
-                obscureText: true,
+                obscureText: _obscureText,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -175,6 +181,15 @@ class _CreateAccountState extends State<CreateAccount> {
                   labelStyle: const TextStyle(
                     fontSize: 20.0,
                     fontFamily: 'Roboto',
+                  ),
+                  prefixIcon: Icon(MdiIcons.lock),
+                  suffixIcon: IconButton(
+                    icon: Icon(_obscureText ? MdiIcons.eyeOff : MdiIcons.eye),
+                    onPressed: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
                   ),
                 ),
               ),

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sample/Firebase_Auth/database.dart';
 import 'Firebase_Auth/session_manager.dart';
 import 'bookservice.dart';
@@ -162,6 +163,7 @@ class _userprofileState extends State<userprofile> {
                                   maxHeight: 40, // You can adjust this value to decrease or increase the height
                                 ),
                                 contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                                prefixIcon: Icon(MdiIcons.account),
                               ),
                             ),
                           ),
@@ -194,6 +196,7 @@ class _userprofileState extends State<userprofile> {
                                   maxHeight: 40, // You can adjust this value to decrease or increase the height
                                 ),
                                 contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                                prefixIcon: Icon(MdiIcons.phone),
                               ),
                               keyboardType: TextInputType.number,
                               inputFormatters: [
@@ -230,6 +233,7 @@ class _userprofileState extends State<userprofile> {
                                   maxHeight: 40, // You can adjust this value to decrease or increase the height
                                 ),
                                 contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                                prefixIcon: Icon(MdiIcons.mapMarker),
                               ),
                             ),
                           ),
@@ -263,6 +267,7 @@ class _userprofileState extends State<userprofile> {
                                   maxHeight: 40, // You can adjust this value to decrease or increase the height
                                 ),
                                 contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                                prefixIcon: Icon(MdiIcons.email),
                               ),
                             ),
                           ),
