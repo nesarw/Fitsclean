@@ -43,6 +43,7 @@ class _forgetpasswordState extends State<forgetpassword> {
             fontSize: 35.0,
             fontFamily: 'Roboto',
             fontStyle: FontStyle.italic,
+              color: Colors.white
           ),
         ),
         centerTitle: true,

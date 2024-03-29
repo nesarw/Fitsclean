@@ -55,9 +55,9 @@ class _serivcehistoryState extends State<serivcehistory> {
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) {
               DocumentSnapshot document = snapshot.data!.docs[index];
-              Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+              Map<dynamic, dynamic> data = document.data()! as Map<dynamic, dynamic>;
               return Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
+                margin: const EdgeInsets.symmetric(vertical: 5),
                 child: Card(
                   clipBehavior: Clip.hardEdge,
                   child: InkWell(
@@ -80,14 +80,14 @@ class _serivcehistoryState extends State<serivcehistory> {
                                   child: RichText(
                                     text: TextSpan(
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                       ),
                                       children: [
                                         TextSpan(text: 'Order Id:\n'),
-                                        TextSpan(text: data['orderId'].length > 18
-                                            ? '${data['orderId'].substring(0, 18)}...'
+                                        TextSpan(text: data['orderId'].length > 15
+                                            ? '${data['orderId'].substring(0, 15)}...'
                                             : data['orderId'],),
                                       ],
                                     ),
@@ -97,7 +97,7 @@ class _serivcehistoryState extends State<serivcehistory> {
                             ),
                           ),
                           Expanded(
-                            flex: 2,
+                            flex: 1,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -105,12 +105,35 @@ class _serivcehistoryState extends State<serivcehistory> {
                                   child: RichText(
                                     text: TextSpan(
                                       style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                       ),
                                       children: [
-                                        TextSpan(text: 'Order Status:\n'),
+                                        TextSpan(text: 'Order Date:\n'),
+                                        TextSpan(text: data['timestamp']?.toDate()?.toString().substring(0, 10) ?? 'N/A')
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Center(
+                                  child: RichText(
+                                    text: TextSpan(
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                      children: [
+                                        TextSpan(text: 'Status:\n'),
                                         TextSpan(text: data['orderStatus'] ?? 'N/A')
                                       ],
                                     ),
@@ -141,7 +164,7 @@ class _serivcehistoryState extends State<serivcehistory> {
                               child:const Text(
                                 'Track Service',
                                 style: TextStyle(
-                                  fontSize: 16.0,
+                                  fontSize: 14.0,
                                   fontFamily: 'Roboto',
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -172,6 +195,7 @@ class _serivcehistoryState extends State<serivcehistory> {
             fontSize: 35.0,
             fontFamily: 'Roboto',
             fontStyle: FontStyle.italic,
+              color: Colors.white,
           ),
         ),
         centerTitle: true,

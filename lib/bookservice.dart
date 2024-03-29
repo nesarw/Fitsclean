@@ -64,11 +64,15 @@ class _bookserviceState extends State<bookservice> {
             fontSize: 35.0,
             fontFamily: 'Roboto',
             fontStyle: FontStyle.italic,
+            color: Colors.white,
           ),
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: IconTheme(
+            data: IconThemeData(color: Colors.white),
+            child: Icon(MdiIcons.pagePreviousOutline),
+          ),
           onPressed: () {
             // Add your onPressed event here
             Navigator.pushReplacement(
@@ -116,6 +120,9 @@ class _bookserviceState extends State<bookservice> {
                                 fontFamily: 'Roboto',
                                 fontWeight: FontWeight.normal,
                               ),
+                            ),
+                            trailing: Icon(
+                              MdiIcons.arrowDownDropCircleOutline,
                             ),
 
                             children: [
@@ -561,6 +568,9 @@ class _bookserviceState extends State<bookservice> {
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
+                            trailing: Icon(
+                              MdiIcons.arrowDownDropCircleOutline,
+                            ),
                             children: [
                               Container(
                                 margin: const EdgeInsets.symmetric(vertical: 10),
@@ -919,6 +929,9 @@ class _bookserviceState extends State<bookservice> {
                                 fontFamily: 'Roboto',
                                 fontWeight: FontWeight.normal,
                               ),
+                            ),
+                            trailing: Icon(
+                              MdiIcons.arrowDownDropCircleOutline,
                             ),
                             children: [
                               Container(
@@ -1380,7 +1393,9 @@ class _bookserviceState extends State<bookservice> {
                           lastDate: DateTime(2025),
                         );
                         if (pickedDate != null) {
-                          print('Selected date: $pickedDate');
+                          setState(() {
+                            pickedDate = pickedDate;
+                          });
                         }
                       },
                       style: OutlinedButton.styleFrom(
@@ -1492,9 +1507,9 @@ class _bookserviceState extends State<bookservice> {
     // Add the user ID and order ID to the items list
     items['userId'] = userId;
     items['orderId'] = orderId;
-    items['orderStatus'] = 'ordered';
-    final timestamp = DateTime.now().toUtc().millisecondsSinceEpoch;
-    items['timestamp'] = DateFormat('MMM d, y h:mm:ss a').format(DateTime.fromMillisecondsSinceEpoch(timestamp));
+    items['orderStatus'] = 'Ordered';
+    items['timestamp'] = Timestamp.fromDate(DateTime.now().toUtc());
+
 
     // Get the selected date and time
     DateTime? pickedDate = await showDatePicker(
@@ -1510,7 +1525,10 @@ class _bookserviceState extends State<bookservice> {
     );
 
     // If a date and time were selected, add them to the items list
-    if (pickedDate != null && pickedTime != null) {
+    if (pickedDate == null || pickedTime == null) {
+      showToast(message: "Please select Date & Time To Book.");
+      return;
+    } else {
       final DateTime dateTime = DateTime(
         pickedDate.year,
         pickedDate.month,
@@ -1527,9 +1545,9 @@ class _bookserviceState extends State<bookservice> {
 
     // Show a toast message and navigate to the next screen
     showToast(message: "Laundry Booked.");
-    // Navigator.pushReplacement(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => const Servicetracking()),
-    // );
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const Homepage()),
+    );
   }
 }

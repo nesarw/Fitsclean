@@ -50,6 +50,7 @@ class _userprofileState extends State<userprofile> {
             fontSize: 35.0,
             fontFamily: 'Roboto',
             fontStyle: FontStyle.italic,
+              color: Colors.white,
           ),
         ),
         centerTitle: true,
@@ -106,32 +107,32 @@ class _userprofileState extends State<userprofile> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 190,
-                                  child: OutlinedButton(
-                                    onPressed: () {
-                                      // Navigator.pushReplacement(
-                                      //   context,
-                                      //   MaterialPageRoute(builder: (context) => login()),
-                                      // );
-                                      // Add your on pressed event here
-                                    },
-                                    style: OutlinedButton.styleFrom(
-                                      foregroundColor: Colors.red[400], shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                      fixedSize: const Size(150, 48), // Set the width and height of the button here
-                                    ),
-                                    child: const Text(
-                                      'Update Picture',
-                                      style: TextStyle(
-                                        fontSize: 20.0, // Increase the font size here
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                // SizedBox(
+                                //   width: 190,
+                                //   child: OutlinedButton(
+                                //     onPressed: () {
+                                //       // Navigator.pushReplacement(
+                                //       //   context,
+                                //       //   MaterialPageRoute(builder: (context) => login()),
+                                //       // );
+                                //       // Add your on pressed event here
+                                //     },
+                                //     style: OutlinedButton.styleFrom(
+                                //       foregroundColor: Colors.red[400], shape: RoundedRectangleBorder(
+                                //       borderRadius: BorderRadius.circular(30),
+                                //     ),
+                                //       fixedSize: const Size(150, 48), // Set the width and height of the button here
+                                //     ),
+                                //     child: const Text(
+                                //       'Update Picture',
+                                //       style: TextStyle(
+                                //         fontSize: 20.0, // Increase the font size here
+                                //         fontFamily: 'Roboto',
+                                //         fontWeight: FontWeight.bold,
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),
@@ -360,6 +361,9 @@ class _userprofileState extends State<userprofile> {
                               ),
                             ),
                           ),
+                          const SizedBox(
+                            height: 20, // Add this line to add space between the text fields
+                          ),
                         ],
                       );
                     } else {
@@ -367,7 +371,6 @@ class _userprofileState extends State<userprofile> {
                     }
                   },
                 ),
-
 
               ),
             ),

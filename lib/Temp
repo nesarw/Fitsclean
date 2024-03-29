@@ -1,39 +1,11 @@
-class _ServicetrackingState extends State<Servicetracking> {
-
-  String? userId = SessionController().userId;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.red[400],
-        title: const Text(
-          "FitsClean",
-          style: TextStyle(
-            fontSize: 35.0,
-            fontFamily: 'Roboto',
-            fontStyle: FontStyle.italic,
-          ),
-        ),
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            // Add your onPressed event here
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const Homepage()),
-            );
-          },
-        ),
-      ),
-      body: Column(
+Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const SizedBox(
             height: 20, // Add this line to add space between the text fields
           ),
           const Text(
-            "Order Tracking",
+            "Order Details",
             style: TextStyle(
               fontSize: 30.0,
               fontFamily: 'Roboto',
@@ -43,33 +15,44 @@ class _ServicetrackingState extends State<Servicetracking> {
           const SizedBox(
             height: 25, // Add this line to add space between the text fields
           ),
-          Text(
-            widget.orderId ?? '',
+          Text('Order ID: ${widget.orderId}',
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 16,
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
           ),
-            Padding(
-              padding: const EdgeInsets.only(left: 0), // Set the left margin here
-              child: SizedBox(
-                width: 300, // Set the width here
-                height: 500, // Set the height here
-                child: OrderTracker(
-                  status: Status.order,
-                  activeColor: Colors.red[400],
-                  inActiveColor: Colors.white,
-                  orderTitleAndDateList: orderList,
-                  shippedTitleAndDateList: shippedList,
-                  outOfDeliveryTitleAndDateList: outOfDeliveryList,
-                  deliveredTitleAndDateList: deliveredList,
-                ),
-              ),
-            ),
           const SizedBox(
             height: 15, // Add this line to add space between the text fields
           ),
+          const Text(
+            "Order Status",
+            style: TextStyle(
+              fontSize: 30.0,
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(
+            height: 25, // Add this line to add space between the text fields
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 0), // Set the left margin here
+            child: SizedBox(
+              width: 300, // Set the width here
+              height: 400, // Set the height here
+              child: OrderTracker(
+                status: Status.order,
+                activeColor: Colors.red[400],
+                inActiveColor: Colors.white,
+                orderTitleAndDateList: orderList,
+                shippedTitleAndDateList: shippedList,
+                outOfDeliveryTitleAndDateList: outOfDeliveryList,
+                deliveredTitleAndDateList: deliveredList,
+              ),
+            ),
+          ),
+
           Center(
             child: ElevatedButton(
               onPressed: () {
@@ -94,19 +77,3 @@ class _ServicetrackingState extends State<Servicetracking> {
           ),
         ],
       ),
-    );
-  }
-}
-
-
-
-
-
-
-Text('Order ID: ${widget.orderId}',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),

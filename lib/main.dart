@@ -48,6 +48,7 @@ class _loginState extends State<login> {
             fontSize: 35.0,
             fontFamily: 'Roboto',
             fontStyle: FontStyle.italic,
+              color: Colors.white
           ),
         ),
         centerTitle: true,

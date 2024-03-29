@@ -1,0 +1,184 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:sample/servicehistory.dart';
+import 'Firebase_Auth/session_manager.dart';
+import 'Homepage.dart';
+import 'package:order_tracker/order_tracker.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();// initialize Flutter binding
+
+  String orderId = "some-order-id-value";
+
+  runApp(MaterialApp(
+    home: Servicetracking(orderId: orderId),
+  ));
+}
+
+class Servicetracking extends StatefulWidget {
+  final String orderId;
+
+  Servicetracking({required this.orderId});
+
+  @override
+  State<Servicetracking> createState() => _ServicetrackingState();
+}
+
+class _ServicetrackingState extends State<Servicetracking> {
+  @override
+  Widget build(BuildContext context) {
+    if (widget.orderId.isNotEmpty) {
+      return TrackingScreen(orderId: widget.orderId);
+    } else {
+      return Center(
+        child: Text('No order ID provided'),
+      );
+    }
+  }
+}
+
+class TrackingScreen extends StatefulWidget {
+  final String orderId;
+
+  TrackingScreen({required this.orderId});
+
+  @override
+  _TrackingScreenState createState() => _TrackingScreenState();
+}
+
+class _TrackingScreenState extends State<TrackingScreen> {
+
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  DocumentSnapshot? _documentSnapshot;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchOrderData();
+  }
+
+  Future<void> _fetchOrderData() async {
+    _documentSnapshot = await _firestore.collection('Order').doc(widget.orderId).get();
+    if (_documentSnapshot != null) {
+      final data = _documentSnapshot!.data() as Map<String, dynamic>?;
+      if (data != null) {
+        setState(() {});
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_documentSnapshot == null) {
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.red[400],
+          title: const Text(
+            "FitsClean",
+            style: TextStyle(
+              fontSize: 35.0,
+              fontFamily: 'Roboto',
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+          centerTitle: true,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              // Add your onPressed event here
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const serivcehistory()),
+              );
+            },
+          ),
+        ),
+        body: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.red[400],
+        title: const Text(
+          "FitsClean",
+          style: TextStyle(
+            fontSize: 35.0,
+            fontFamily: 'Roboto',
+            fontStyle: FontStyle.italic,
+          ),
+        ),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            // Add your onPressed event here
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const serivcehistory()),
+            );
+          },
+        ),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 20, // Add this line to add space between the text fields
+          ),
+          const Text(
+            "Order Details",
+            style: TextStyle(
+              fontSize: 30.0,
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(
+            height: 25, // Add this line to add space between the text fields
+          ),
+          Text(
+            'Order ID: ${widget.orderId}',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          ...(_documentSnapshot!.data() as Map<String, dynamic>)
+              .entries
+              .map((entry) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(
+                '${entry.key}: ${entry.value}',
+                style:
+                TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            );
+          }).toList(),
+        ],
+      ),
+    );
+  }
+}
+
+List<TextDto> orderList = [
+  TextDto("Order Placed.", ""),
+];
+
+List<TextDto> shippedList = [
+  TextDto("Order Shipped.", ""),
+];
+
+List<TextDto> outOfDeliveryList = [
+  TextDto("Order Out for Delivery.", ""),
+];
+
+List<TextDto> deliveredList = [
+  TextDto("Order Delivered.", ""),
+];
