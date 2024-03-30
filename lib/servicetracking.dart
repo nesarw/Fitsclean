@@ -52,9 +52,9 @@ class TrackingScreen extends StatefulWidget {
 class _TrackingScreenState extends State<TrackingScreen> {
 
   String? orderStatus;
-  late Status status;
   String? orderDate;
   String? orderPDate;
+  late Status status;
 
   //orders
   //male
@@ -83,7 +83,15 @@ class _TrackingScreenState extends State<TrackingScreen> {
   void initState() {
     super.initState();
     getOrderStatus();
+    Status status;
   }
+
+  @override
+  void dispose() {
+    // Call the super.dispose method to clean up the State object
+    super.dispose();
+  }
+
 
   Future<void> getOrderStatus() async {
     final db = FirebaseFirestore.instance;
@@ -91,48 +99,48 @@ class _TrackingScreenState extends State<TrackingScreen> {
     await db.collection('Order').doc(widget.orderId).get();
 
     if (orderSnapshot.exists) {
+      final orderData = orderSnapshot.data();
+      final orderDateTime = orderData?['Order Date and Time'].toDate();
+      final orderTimestamp = orderData?['timestamp'];
+
+      // Update the state with non-nullable values
       setState(() {
-        orderStatus = orderSnapshot.data()?['orderStatus'];
-        var orderDateTime = orderSnapshot.data()?['Order Date and Time'].toDate();
-        if (orderDateTime != null) {
-          orderDate = DateFormat.yMMMd().format(orderDateTime);
-        }
-        var orderTimestamp = orderSnapshot.data()?['timestamp'];
-        if (orderTimestamp != null) {
-          orderPDate = DateFormat.yMMMd().format(orderTimestamp.toDate());
-        }
+        orderStatus = orderData?['orderStatus'];
+        orderDate = DateFormat.yMMMd().format(orderDateTime!);
+        orderPDate = DateFormat.yMMMd().format(orderTimestamp!.toDate());
 
-        //orders
-        //male
-        mtshirt = orderSnapshot.data()?['mtshirt'] as int?;
-        mshirt = orderSnapshot.data()?['mshirt']as int?;
-        mpant = orderSnapshot.data()?['mpant']as int?;
-        msuits = orderSnapshot.data()?['msuits']as int?;
-        mtraditional = orderSnapshot.data()?['mtraditional']as int?;
+        mtshirt = orderData?['mtshirt'] as int?;
+        mshirt = orderData?['mshirt'] as int?;
+        mpant = orderData?['mpant'] as int?;
+        msuits = orderData?['msuits'] as int?;
+        mtraditional = orderData?['mtraditional'] as int?;
 
-        //female
-        ftshirt = orderSnapshot.data()?['ftshirt'] as int?;
-        fkurta = orderSnapshot.data()?['fkurta']as int?;
-        fpant = orderSnapshot.data()?['fpant']as int?;
-        fsaree = orderSnapshot.data()?['fsaree']as int?;
+        ftshirt = orderData?['ftshirt'] as int?;
+        fkurta = orderData?['fkurta'] as int?;
+        fpant = orderData?['fpant'] as int?;
+        fsaree = orderData?['fsaree'] as int?;
 
-        //kids
-        ktshirt = orderSnapshot.data()?['ktshirt']as int?;
-        kshirt = orderSnapshot.data()?['kshirt']as int?;
-        kpant = orderSnapshot.data()?['kpant']as int?;
-        ktoddler = orderSnapshot.data()?['ktoddler']as int?;
-        kethinic = orderSnapshot.data()?['kethinic']as int?;
+        ktshirt = orderData?['ktshirt'] as int?;
+        kshirt = orderData?['kshirt'] as int?;
+        kpant = orderData?['kpant'] as int?;
+        ktoddler = orderData?['ktoddler'] as int?;
+        kethinic = orderData?['kethinic'] as int?;
+
 
         if (orderStatus == 'Ordered') {
           status = Status.order;
         } else if (orderStatus == 'Shipped') {
-          status = Status.shipped;
-        } else if (orderStatus == 'Outfordelivery') {
-          status = Status.outOfDelivery;
-        } else if (orderStatus == 'Delivered') {
-          status = Status.delivered;
-        } else {
-          status = Status.order;
+          setState(() {
+            status = Status.shipped;
+          });
+        } else if (orderStatus == 'outOfDelivery') {
+          setState(() {
+            status = Status.outOfDelivery;
+          });
+        } else if (orderStatus == 'Delivered'){
+          setState(() {
+            status = Status.delivered;
+          });
         }
 
       });
