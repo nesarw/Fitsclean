@@ -282,6 +282,31 @@ class _CreateAccountState extends State<CreateAccount> {
   void _signup() async {
     String email = _emailcontroller.text;
     String password = _passwordcontroller.text;
+
+
+    // Validate password
+    final RegExp hasNumber = RegExp(r'[0-9]');
+    final RegExp hasUpperCase = RegExp(r'[A-Z]');
+    final RegExp hasLowerCase = RegExp(r'[a-z]');
+    final RegExp hasSpecialChar = RegExp(r'[!@#$%^&*(),.?":{}|<>]');
+    if (password.length < 8 ||
+        !hasNumber.hasMatch(password) ||
+        !hasUpperCase.hasMatch(password) ||
+        !hasLowerCase.hasMatch(password) ||
+        !hasSpecialChar.hasMatch(password)) {
+      showToast(message: "Password must be at least 8 characters long and include at least one number, one uppercase letter, one lowercase letter, and one special character.");
+      return;
+    }
+
+    // Validate email
+    final RegExp emailRegex = RegExp(
+        r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+');
+    if (!emailRegex.hasMatch(email)) {
+      showToast(message: "Please enter a valid email address.");
+      return;
+    }
+
+
     try {
       UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
