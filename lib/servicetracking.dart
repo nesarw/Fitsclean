@@ -55,6 +55,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
   String? orderDate;
   String? orderPDate;
   late Status status;
+  bool isLoading = true;
 
   //orders
   //male
@@ -82,8 +83,9 @@ class _TrackingScreenState extends State<TrackingScreen> {
   @override
   void initState() {
     super.initState();
-    getOrderStatus();
-    Status status;
+    Future.delayed(const Duration(milliseconds: 100), () {
+      getOrderStatus();
+    });
   }
 
   @override
@@ -127,22 +129,18 @@ class _TrackingScreenState extends State<TrackingScreen> {
         kethinic = orderData?['kethinic'] as int?;
 
 
-        if (orderStatus == 'Ordered') {
-          status = Status.order;
-        } else if (orderStatus == 'Shipped') {
-          setState(() {
+        if (orderStatus != null) {
+          if (orderStatus == 'Ordered') {
+            status = Status.order;
+          } else if (orderStatus == 'Shipped') {
             status = Status.shipped;
-          });
-        } else if (orderStatus == 'outOfDelivery') {
-          setState(() {
+          } else if (orderStatus == 'outOfDelivery') {
             status = Status.outOfDelivery;
-          });
-        } else if (orderStatus == 'Delivered'){
-          setState(() {
+          } else if (orderStatus == 'Delivered') {
             status = Status.delivered;
-          });
+          }
         }
-
+        isLoading = false;
       });
     }
   }
@@ -177,6 +175,10 @@ class _TrackingScreenState extends State<TrackingScreen> {
         ),
       ),
       body:
+      isLoading
+          ? const Center(
+        child: CircularProgressIndicator(),
+      ):
       SingleChildScrollView(
       child:Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -482,3 +484,4 @@ List<TextDto> outOfDeliveryList = [
 List<TextDto> deliveredList = [
   TextDto("Order Delivered.", ""),
 ];
+
