@@ -30,6 +30,12 @@ class _bookserviceState extends State<bookservice> {
 
   String? userId = SessionController().userId;
 
+  bool isSelectedWashing = false;
+  bool isSelectedFullServices = false;
+  bool isSelectedDrying = false;
+  bool isSelectedIroning = false;
+
+
 
   //male
   final TextEditingController _mtshirt = TextEditingController(text: '0');
@@ -1437,6 +1443,116 @@ class _bookserviceState extends State<bookservice> {
                         ),
                       ),
                     ),
+                    const SizedBox(
+                      height: 20, // Add this line to add space between the date picker and time picker
+                    ),
+                    const Text(
+                      "Select Service Category",
+                      style: TextStyle(
+                        fontSize: 25.0,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: ChoiceChip(
+                                label: Text("        Washing            ",
+                                  style: TextStyle(
+                                    color: isSelectedWashing ? Colors.white : Colors.red, // Change the text color
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                selected: isSelectedWashing,
+                                selectedColor: Colors.red,
+                                onSelected: (newState) {
+                                  setState(() {
+                                    isSelectedWashing = newState;
+                                    if (isSelectedWashing = true){
+                                      isSelectedFullServices = false;
+                                    }
+                                  });
+                                },
+                              ),
+                            ),
+                            Expanded(
+                              child: ChoiceChip(
+                                label: Text("           Ironing            ",
+                                  style: TextStyle(
+                                    color: isSelectedIroning ? Colors.white : Colors.red, // Change the text color
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                selected: isSelectedIroning,
+                                selectedColor: Colors.red,
+                                onSelected: (newState) {
+                                  setState(() {
+                                    isSelectedIroning = newState;
+                                    if (isSelectedIroning = true){
+                                      isSelectedFullServices = false;
+                                    }
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        ),
+                        SizedBox(height: 8),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: ChoiceChip(
+                                label: Text("          Drying            ",
+                                  style: TextStyle(
+                                    color: isSelectedDrying ? Colors.white : Colors.red, // Change the text color
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                selected: isSelectedDrying,
+                                selectedColor: Colors.red,
+                                onSelected: (newState) {
+                                  setState(() {
+                                    isSelectedDrying = newState;
+                                    if (isSelectedDrying = true){
+                                      isSelectedFullServices = false;
+                                    }
+                                  });
+                                },
+                              ),
+                            ),
+                            Expanded(
+                              child: ChoiceChip(
+                                label: Text("      Full Services            ",
+                                  style: TextStyle(
+                                    color: isSelectedFullServices ? Colors.white : Colors.red, // Change the text color
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                selected: isSelectedFullServices,
+                                selectedColor: Colors.red,
+                                onSelected: (newState) {
+                                  setState(() {
+                                    isSelectedFullServices = newState;
+                                    if (isSelectedFullServices = true){
+                                      isSelectedDrying = false;
+                                      isSelectedWashing = false;
+                                      isSelectedIroning = false;
+                                    }
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        ),
+                      ],
+                    )
+
+
                   ],
                 ),
               ),
