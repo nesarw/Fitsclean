@@ -80,7 +80,7 @@ class _serivcehistoryState extends State<serivcehistory> {
                                   child: RichText(
                                     text: TextSpan(
                                       style: const TextStyle(
-                                        fontSize: 14,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                       ),
@@ -105,7 +105,7 @@ class _serivcehistoryState extends State<serivcehistory> {
                                   child: RichText(
                                     text: TextSpan(
                                       style: const TextStyle(
-                                        fontSize: 14,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                       ),
@@ -128,7 +128,7 @@ class _serivcehistoryState extends State<serivcehistory> {
                                   child: RichText(
                                     text: TextSpan(
                                       style: const TextStyle(
-                                        fontSize: 14,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                       ),
@@ -143,7 +143,7 @@ class _serivcehistoryState extends State<serivcehistory> {
                             ),
                           ),
                           Expanded(
-                            flex: 2,
+                            flex: 1,
                             child: ElevatedButton(
                               onPressed: () {
                                 Navigator.pushReplacement(
@@ -162,9 +162,9 @@ class _serivcehistoryState extends State<serivcehistory> {
                                 fixedSize: const Size(100, 40),
                               ),
                               child:const Text(
-                                'Track Service',
+                                'Track',
                                 style: TextStyle(
-                                  fontSize: 14.0,
+                                  fontSize: 17.0,
                                   fontFamily: 'Roboto',
                                   fontWeight: FontWeight.bold,
                                 ),

@@ -343,6 +343,7 @@ class _userprofileState extends State<userprofile> {
                             child: OutlinedButton(
                               onPressed: () {
                                 FirebaseAuth.instance.signOut();
+                                SessionController().clearUserId();
                                 showToast(message:"User is Signout Succesfully.");
                                 Navigator.pushReplacement(
                                   context,

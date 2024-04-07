@@ -57,6 +57,8 @@ class _TrackingScreenState extends State<TrackingScreen> {
   late Status status;
   bool isLoading = true;
 
+  String? Servicecategory;
+
   //orders
   //male
   int? mtshirt;
@@ -108,6 +110,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
       // Update the state with non-nullable values
       setState(() {
         orderStatus = orderData?['orderStatus'];
+        Servicecategory = orderData?['Service Category'];
         orderDate = DateFormat.yMMMd().format(orderDateTime!);
         orderPDate = DateFormat.yMMMd().format(orderTimestamp!.toDate());
 
@@ -251,6 +254,17 @@ class _TrackingScreenState extends State<TrackingScreen> {
                 ),
                 Text(
                   'Order Pickup: $orderDate',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10, // Add this line to add space between the text fields
+                ),
+                Text(
+                  'Service Category: $Servicecategory',
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

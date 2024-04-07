@@ -1618,6 +1618,32 @@ class _bookserviceState extends State<bookservice> {
       return;
     }
 
+    //Service Category
+    String serviceCategory = '';
+    bool isFullServiceSelected = isSelectedWashing && isSelectedDrying && isSelectedIroning;
+    if (isSelectedWashing) {
+      serviceCategory += 'Washing';
+    }
+    if (isSelectedDrying) {
+      serviceCategory += (serviceCategory.isNotEmpty) ? ' + Drying' : 'Drying';
+    }
+    if (isSelectedIroning) {
+      serviceCategory += (serviceCategory.isNotEmpty) ? ' + Ironing' : 'Ironing';
+    }
+    if (isSelectedFullServices){
+    serviceCategory += 'Full Service';
+    }
+    // If all three options are selected, set the serviceCategory to "Full Service"
+    if (isFullServiceSelected) {
+      serviceCategory = 'Full Service';
+    }
+    if (serviceCategory == null || serviceCategory.isEmpty) {
+      showToast(message: "Please select at least one service category.");
+      return;
+    }
+    // Add the serviceCategory to the items list
+    items['Service Category'] = serviceCategory;
+
     // Add the user ID and order ID to the items list
     items['userId'] = userId;
     items['orderId'] = orderId;
