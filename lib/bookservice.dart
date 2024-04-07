@@ -1457,6 +1457,7 @@ class _bookserviceState extends State<bookservice> {
                     Column(
                       children: [
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Expanded(
                               child: ChoiceChip(
@@ -1499,10 +1500,10 @@ class _bookserviceState extends State<bookservice> {
                               ),
                             ),
                           ],
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Expanded(
                               child: ChoiceChip(
@@ -1547,7 +1548,6 @@ class _bookserviceState extends State<bookservice> {
                               ),
                             ),
                           ],
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         ),
                       ],
                     )
@@ -1637,7 +1637,7 @@ class _bookserviceState extends State<bookservice> {
     if (isFullServiceSelected) {
       serviceCategory = 'Full Service';
     }
-    if (serviceCategory == null || serviceCategory.isEmpty) {
+    if (serviceCategory.isEmpty) {
       showToast(message: "Please select at least one service category.");
       return;
     }
