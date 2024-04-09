@@ -146,7 +146,7 @@ class _userprofileState extends State<userprofile> {
                             ),
                           ),
                           SizedBox(
-                            width: 370,
+                            width: 400,
                             child: TextField(
                               controller: _namecontroller,
                               decoration: InputDecoration(
@@ -179,7 +179,7 @@ class _userprofileState extends State<userprofile> {
                             ),
                           ),
                           SizedBox(
-                            width: 370,
+                            width: 400,
                             child: TextField(
                               controller: _mobilenocontroller,
                               decoration: InputDecoration(
@@ -216,7 +216,7 @@ class _userprofileState extends State<userprofile> {
                             ),
                           ),
                           SizedBox(
-                            width: 370,
+                            width: 400,
                             child: TextField(
                               controller: _addresscontroller,
                               decoration: InputDecoration(
@@ -249,7 +249,7 @@ class _userprofileState extends State<userprofile> {
                             ),
                           ),
                           SizedBox(
-                            width: 370,
+                            width: 400,
                             child: TextField(
                               controller: _emailcontroller,
                               readOnly: true,
@@ -275,7 +275,7 @@ class _userprofileState extends State<userprofile> {
                             height: 20, // Add this line to add space between the text fields
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 3),
+                            padding: const EdgeInsets.symmetric(horizontal: 6),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -339,7 +339,7 @@ class _userprofileState extends State<userprofile> {
                             height: 20, // Add this line to add space between the text fields
                           ),
                           SizedBox(
-                            width: 370,
+                            width: 400,
                             child: OutlinedButton(
                               onPressed: () {
                                 FirebaseAuth.instance.signOut();
