@@ -254,31 +254,6 @@ class _CreateAccountState extends State<CreateAccount> {
     );
   }
 
-
-
-  Future<void> createUser() async {
-    try {
-      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailcontroller.text,
-        password: _passwordcontroller.text,
-      );
-      User? user = userCredential.user;
-      String? uid = user?.uid;
-      String uidStr = uid ?? "";
-      await DatabaseMethods().addUserDetails({
-        "Id": randomNumeric(10),
-        "Name": _namecontroller.text,
-        "Mobile No": _mobilenocontroller.text,
-        "Address": _addresscontroller.text,
-        "Email": _emailcontroller.text,
-        "Password": _passwordcontroller.text,
-        "UID": uidStr,
-      }, uidStr);
-    } catch (e) {
-      print(e);
-    }
-  }
-
   void _signup() async {
     String email = _emailcontroller.text;
     String password = _passwordcontroller.text;
