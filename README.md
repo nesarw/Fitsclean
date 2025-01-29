@@ -1,7 +1,7 @@
-```markdown
-# NESARW FitSClean
 
-## 📌 Overview
+FitSClean
+
+Overview
 **NESARW FitSClean** is a Flutter-based application designed for cross-platform compatibility, supporting **Android, iOS, Web, Windows, MacOS, and Linux**. This project leverages Firebase for authentication and real-time database management.
 
 ## 📂 Project Structure
