@@ -42,7 +42,7 @@ Ensure you have the following installed:
 ### 2️⃣ Installation
 Clone the repository and install dependencies:
 ```bash
-git clone https://github.com/yourusername/nesarw-fitsclean.git
+git clone https://github.com/nesarw/nesarw-fitsclean.git
 cd nesarw-fitsclean
 flutter pub get
 ```
